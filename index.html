@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dorama Box 🎬</title>
+  
+  <!-- Importando fontes premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #e11d48;      /* Rosa intenso, inspirado em temas asiáticos */
+      --primary-light: #f43f5e;
+      --primary-glow: rgba(225, 29, 72, 0.5);
+      --bg-dark: #0b0710;      /* fundo escuro com leve tom arroxeado */
+      --card-bg: rgba(18, 12, 28, 0.65);
+      --border-color: rgba(244, 63, 94, 0.15);
+      --text-main: #ffffff;
+      --text-muted: #a5b4cb;
+      --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: var(--font-family);
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Blobs com cores mais "dorama" (tons de rosa, roxo e magenta) */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: 0;
+      opacity: 0.4;
+      pointer-events: none;
+      animation: floatBlob 22s ease-in-out infinite alternate;
+    }
+
+    .blob-1 {
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle, #be185d 0%, transparent 70%);
+      top: -100px;
+      left: -100px;
+    }
+
+    .blob-2 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, #6d28d9 0%, transparent 70%);
+      bottom: -120px;
+      right: -80px;
+      animation-delay: -7s;
+    }
+
+    .blob-3 {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, #e11d48 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+      opacity: 0.25;
+    }
+
+    @keyframes floatBlob {
+      0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+      50% { transform: translate(50px, 30px) scale(1.2) rotate(180deg); }
+      100% { transform: translate(-40px, 40px) scale(0.85) rotate(360deg); }
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 440px;
+      width: 92%;
+      padding: 40px 30px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 50px rgba(225, 29, 72, 0.08);
+      text-align: center;
+      animation: cardEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes cardEntrance {
+      0% { opacity: 0; transform: translateY(30px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0px) scale(1); }
+    }
+
+    /* Logo estilo "DoramaBox" com ícone de claquete/filme */
+    .dorama-logo {
+      width: 76px;
+      height: 76px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 4px 16px rgba(225, 29, 72, 0.4));
+      animation: floatLogo 6s ease-in-out infinite;
+    }
+
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
+    }
+
+    .title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .title-icon {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      color: #f472b6;
+      filter: drop-shadow(0 0 8px rgba(225, 29, 72, 0.3));
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 30%, #fbcfe8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+
+    .sub {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      font-weight: 400;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 16px;
+      text-align: left;
+      transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .feature-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(244, 63, 94, 0.3);
+      transform: translateX(4px);
+    }
+
+    .feature-icon {
+      font-size: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      width: 42px;
+      height: 42px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      flex-shrink: 0;
+    }
+
+    .feature-text h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 2px;
+    }
+
+    .feature-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 18px 24px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border: none;
+      border-radius: 16px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 18px var(--primary-glow);
+      transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: skewX(-25deg);
+      transition: 0.75s;
+      opacity: 0;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px var(--primary-glow), 0 0 20px rgba(244, 63, 94, 0.4);
+    }
+
+    .button:hover::after {
+      left: 125%;
+      opacity: 1;
+    }
+
+    .btn-arrow {
+      transition: transform 0.3s;
+    }
+
+    .button:hover .btn-arrow {
+      transform: translateX(4px);
+    }
+
+    .footer {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 24px;
+      letter-spacing: 0.1px;
+      line-height: 1.4;
+    }
+
+    /* pequeno destaque para o nome DoramaBox */
+    .brand-highlight {
+      color: #f472b6;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Blobs de fundo (cores ajustadas para o tema) -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="wrapper">
+
+    <!-- Ícone de claquete / cinema (SVG) -->
+    <svg class="dorama-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="20" width="80" height="60" rx="8" fill="#e11d48" />
+      <rect x="10" y="20" width="80" height="12" fill="#be123c" />
+      <circle cx="34" cy="50" r="8" fill="#fff" />
+      <circle cx="66" cy="50" r="8" fill="#fff" />
+      <rect x="10" y="68" width="80" height="12" fill="#be123c" />
+      <path d="M50 10 L55 20 L45 20 L50 10Z" fill="#f43f5e" />
+      <path d="M50 90 L55 80 L45 80 L50 90Z" fill="#f43f5e" />
+    </svg>
+
+    <!-- Título com ícone de filme -->
+    <div class="title-wrapper">
+      <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="2.18" />
+        <line x1="8" y1="2" x2="8" y2="22" />
+        <line x1="16" y1="2" x2="16" y2="22" />
+        <line x1="2" y1="8" x2="22" y2="8" />
+        <line x1="2" y1="16" x2="22" y2="16" />
+      </svg>
+      <h1>Dorama Box</h1>
+    </div>
+
+    <p class="sub">
+      Acesso exclusivo ao melhor dos doramas. Inicie o bot oficial no Telegram e confirme sua entrada para desbloquear todo o conteúdo.
+    </p>
+
+    <div class="features">
+      <div class="feature-item">
+        <span class="feature-icon">🇰🇷</span>
+        <div class="feature-text">
+          <h3>Doramas Completos</h3>
+          <p>Episódios legendados e com qualidade HD</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📱</span>
+        <div class="feature-text">
+          <h3>Atualizações Diárias</h3>
+          <p>Novos episódios assim que lançam na Coreia</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🎭</span>
+        <div class="feature-text">
+          <h3>Variedades &amp; OST</h3>
+          <p>Conteúdo extra, trilhas sonoras e bastidores</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">⏳</span>
+        <div class="feature-text">
+          <h3>Vagas Limitadas</h3>
+          <p>Garanta seu acesso antes do encerramento</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Link de redirecionamento (substitua pelo link do seu bot) -->
+    <a href="https://paylume.fans/l/cc988830" class="button" id="ctaButton">
+      <span>ENTRAR NO DORAMA BOX</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-arrow">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </a>
+
+    <div class="footer">
+      Você será redirecionado para o Telegram com segurança.
+    </div>
+
+  </div>
+
+  <!-- Script para capturar parâmetros UTM e atualizar o link (mantido exatamente igual ao original) -->
+  <script>
+    (function() {
+      function getUrlParams() {
+        var params = {};
+        var queryString = window.location.search;
+        if (queryString) {
+          var pairs = queryString.substring(1).split('&');
+          for (var i = 0; i < pairs.length; i++) {
+            var pair = pairs[i].split('=');
+            var key = decodeURIComponent(pair[0]);
+            var value = decodeURIComponent(pair[1] || '');
+            params[key] = value;
+          }
+        }
+        return params;
+      }
+
+      function buildRedirectUrl(baseUrl, params) {
+        var url = new URL(baseUrl);
+        for (var key in params) {
+          if (params.hasOwnProperty(key) && params[key] !== '') {
+            url.searchParams.set(key, params[key]);
+          }
+        }
+        return url.toString();
+      }
+
+      var button = document.getElementById('ctaButton');
+      if (button) {
+        var baseUrl = button.getAttribute('href');
+        var params = getUrlParams();
+        var newUrl = buildRedirectUrl(baseUrl, params);
+        button.setAttribute('href', newUrl);
+        console.log('🔗 Link atualizado:', newUrl);
+        console.log('📊 Parâmetros capturados:', params);
+      }
+    })();
+  </script>
+
+</body>
+</html>
